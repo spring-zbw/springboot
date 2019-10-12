@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbw.springboot.dao.TimerStatisticDao">
+    <resultMap id="BaseResultMap" type="com.zbw.springboot.pojo.CustomerCnt">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="customer_id" jdbcType="BIGINT" property="customer_id" />
+        <result column="fans_cnt" jdbcType="INTEGER" property="fans_cnt" />
+        <result column="thumb_cnt" jdbcType="INTEGER" property="thumb_cnt" />
+        <result column="attention_cnt" jdbcType="INTEGER" property="attention_cnt" />
+        <result column="invite_cnt" jdbcType="INTEGER" property="invite_cnt" />
+        <result column="invite_cnt_uptime" jdbcType="TIMESTAMP" property="invite_cnt_uptime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, customer_id, fans_cnt, thumb_cnt, attention_cnt, invite_cnt
+  </sql>
+    <select id="findCustomerCntAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from y_customer_cnt
+    </select>
+    <select id="getMutualFans" resultType = "java.lang.Integer">
+             SELECT
+          COUNT(*)
+        FROM
+          y_customer_relation
+        WHERE customer_id = #{customer_id}
+    </select>
+</mapper>
