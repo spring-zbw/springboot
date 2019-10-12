@@ -16,7 +16,9 @@ public class ScheduledTask {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     @Autowired
     private TimerStatisticService timerStatisticService;
+
     @Scheduled(cron = "0 1 0 * * ?")
+//    @Scheduled(cron = "0 0/2 * * * ?")
     public void reportCurrentTime() {
         timerStatisticService.timerStatistics();
         System.out.println("现在时间：" + dateFormat.format(new Date()));

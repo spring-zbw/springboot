@@ -48,7 +48,7 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
                 true,
                 true, false);
         setChart(chart);
-
+        chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         PiePlot pieplot = (PiePlot) chart.getPlot();
         pieplot.setSectionPaint("粉丝数"+fansCnt, Color.decode("#84D0E0"));
         pieplot.setSectionPaint("关注数"+thumbCnt, Color.decode("#FFDD65"));
@@ -66,8 +66,8 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
         Date date = new Date();
         String str = simpleDateFormat.format(date);
         try {
-           ChartUtilities.saveChartAsPNG(new File("/opt/apache-tomcat-8.5.16/webapps/yuejian-mg/data/"+str+"/"+getRandomFileName(customerId)+".jpg"), chart, 375, 215);
-            //ChartUtilities.saveChartAsPNG(new File("d:\\myjava\\"+str+"\\"+getRandomFileName(customerId)+".png"), chart, 375, 215);
+           //ChartUtilities.saveChartAsPNG(new File("/opt/apache-tomcat-8.5.16/webapps/yuejian-mg/data/"+str+"/"+getRandomFileName(customerId)+".jpg"), chart, 375, 215);
+            ChartUtilities.saveChartAsPNG(new File("d:\\myjava\\"+str+"\\"+getRandomFileName(customerId)+".jpg"), chart, 450, 258);
         } catch (Exception e) {
             System.err.println("创建图形时出错");
         }
