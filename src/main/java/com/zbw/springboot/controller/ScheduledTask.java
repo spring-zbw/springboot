@@ -17,11 +17,13 @@ public class ScheduledTask {
     @Autowired
     private TimerStatisticService timerStatisticService;
 
+
+//      @Scheduled(cron = "0 0/1 * * * ?")
     @Scheduled(cron = "0 1 0 * * ?")
-//    @Scheduled(cron = "0 0/2 * * * ?")
     public void reportCurrentTime() {
+        System.out.println("开始时间：" + dateFormat.format(new Date()));
         timerStatisticService.timerStatistics();
-        System.out.println("现在时间：" + dateFormat.format(new Date()));
+        System.out.println("结束时间：" + dateFormat.format(new Date()));
     }
 
 }

@@ -16,7 +16,7 @@
     <select id="findCustomerCntAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from y_customer_cnt
+        from y_customer_cnt where  fans_cnt &lt;&gt; 0 or attention_cnt &lt;&gt; 0;
     </select>
     <select id="getMutualFans" resultType = "java.lang.Integer">
              SELECT

@@ -37,10 +37,10 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
      private TimerStatisticDao timerStatisticDao;
 
 
-     public  void generatingStatisticalGraph(long customerId,int fansCnt,int thumbCnt,int mutualFans) {
+     public  void generatingStatisticalGraph(long customerId,int fansCnt,int attentionCnt,int mutualFans) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("粉丝数"+fansCnt, new Double(fansCnt));
-        dataset.setValue("关注数"+thumbCnt, new Double(thumbCnt));
+        dataset.setValue("关注数"+attentionCnt, new Double(attentionCnt));
         dataset.setValue("互粉数"+mutualFans, new Double(mutualFans));
 
         JFreeChart chart = ChartFactory.createPieChart("",
@@ -51,7 +51,7 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
         chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         PiePlot pieplot = (PiePlot) chart.getPlot();
         pieplot.setSectionPaint("粉丝数"+fansCnt, Color.decode("#84D0E0"));
-        pieplot.setSectionPaint("关注数"+thumbCnt, Color.decode("#FFDD65"));
+        pieplot.setSectionPaint("关注数"+attentionCnt, Color.decode("#FFDD65"));
         pieplot.setSectionPaint("互粉数"+mutualFans, Color.decode("#FC935E"));
 
         PiePlot piePlot= (PiePlot) chart.getPlot();
@@ -66,8 +66,9 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
         Date date = new Date();
         String str = simpleDateFormat.format(date);
         try {
-           //ChartUtilities.saveChartAsPNG(new File("/opt/apache-tomcat-8.5.16/webapps/yuejian-mg/data/"+str+"/"+getRandomFileName(customerId)+".jpg"), chart, 375, 215);
-            ChartUtilities.saveChartAsPNG(new File("d:\\myjava\\"+str+"\\"+getRandomFileName(customerId)+".jpg"), chart, 450, 258);
+            System.err.println("正在创建");
+          ChartUtilities.saveChartAsPNG(new File("/opt/apache-tomcat-8.5.16/webapps/yuejian-mg/data/"+str+"/"+getRandomFileName(customerId)+".jpg"), chart, 375, 215);
+           // ChartUtilities.saveChartAsPNG(new File("d:\\myjava\\"+str+"\\"+getRandomFileName(customerId)+".jpg"), chart, 450, 258);
         } catch (Exception e) {
             System.err.println("创建图形时出错");
         }
@@ -102,7 +103,7 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
                         CustomerCnt customerCnt= nowList.get(j);
                         Integer customer_id = customerCnt.getCustomer_id().intValue();
                         int mutualFans = timerStatisticDao.getMutualFans(customer_id);
-                        generatingStatisticalGraph(customerCnt.getCustomer_id(),customerCnt.getFans_cnt(),customerCnt.getThumb_cnt(),mutualFans);
+                        generatingStatisticalGraph(customerCnt.getCustomer_id(),customerCnt.getFans_cnt(),customerCnt.getAttention_cnt(),mutualFans);
 
                     }
                     return "";
