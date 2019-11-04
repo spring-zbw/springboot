@@ -18,9 +18,9 @@ public class ScheduledTask {
     private TimerStatisticService timerStatisticService;
 
 
-//      @Scheduled(cron = "0 0/1 * * * ?")
-    @Scheduled(cron = "0 1 0 * * ?")
-    public void reportCurrentTime() {
+      //@Scheduled(cron = "0 0/1 * * * ?")
+      @Scheduled(cron = "0 1 0 * * ?")
+      public void reportCurrentTime() {
         System.out.println("开始时间：" + dateFormat.format(new Date()));
         timerStatisticService.timerStatistics();
         System.out.println("结束时间：" + dateFormat.format(new Date()));

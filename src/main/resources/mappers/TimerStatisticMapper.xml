@@ -23,6 +23,6 @@
           COUNT(*)
         FROM
           y_customer_relation
-        WHERE customer_id = #{customer_id}
+        WHERE customer_id = #{customer_id} and relation_type=2
     </select>
 </mapper>
