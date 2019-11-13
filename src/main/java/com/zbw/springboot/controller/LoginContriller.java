@@ -1,9 +1,6 @@
 package com.zbw.springboot.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -12,13 +9,11 @@ import java.util.HashMap;
  */
 @RestController
 @RequestMapping("/api/login/")
+@CrossOrigin
 public class LoginContriller {
 
     @PostMapping("enter")
-    public HashMap<String,Object> updateOutCashPassword(
-             @RequestParam("user") String user,
-            @RequestParam("password") String password
-    ){
+    public HashMap<String,Object> updateOutCashPassword(String user,String password){
         HashMap<String,Object> hashMap=new HashMap<>();
         if(user.equals("zbw")&&password.equals("123")){
             hashMap.put("status",200);
