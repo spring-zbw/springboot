@@ -1,8 +1,15 @@
 package com.zbw.springboot.controller;
 
+import com.zbw.springboot.pojo.ExportUser;
+import com.zbw.springboot.service.TimerStatisticService;
+import com.zbw.springboot.util.ExcelUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 郑博文 on 2019/11/13.
@@ -12,6 +19,9 @@ import java.util.HashMap;
 @CrossOrigin
 public class LoginContriller {
 
+     @Autowired
+     private TimerStatisticService timerStatisticService;
+
     @PostMapping("enter")
     public HashMap<String,Object> updateOutCashPassword(String user,String password){
         HashMap<String,Object> hashMap=new HashMap<>();
@@ -20,6 +30,17 @@ public class LoginContriller {
             hashMap.put("message","登录成功");
         }
         return hashMap;
+    }
+    @GetMapping("export")
+    public void excelDownload(HttpServletResponse response,String textName,Integer type,String endDate,String startDate) throws IOException {
+
+
+        List<ExportUser> userList= timerStatisticService.getExportUser(type,endDate,startDate);
+        String sheetName = textName;
+        String fileName = textName+".xls";
+
+        ExcelUtil.exportExcel(response, userList, sheetName, fileName, 20);
+
     }
 
 }

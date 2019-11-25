@@ -1,6 +1,7 @@
 package com.zbw.springboot.dao;
 
 import com.zbw.springboot.pojo.CustomerCnt;
+import com.zbw.springboot.pojo.ExportUser;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,13 @@ public interface TimerStatisticDao {
      * @return
      */
     int getMutualFans(@Param("customer_id") Integer customer_id);
+
+    /**
+     * 根据条件查询
+     * @param type
+     * @param endDate
+     * @param startDate
+     * @return
+     */
+    List<ExportUser> getExportUser(@Param("type") Integer type, @Param("endDate") String endDate, @Param("startDate") String startDate);
 }

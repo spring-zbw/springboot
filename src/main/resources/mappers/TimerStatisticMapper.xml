@@ -10,6 +10,13 @@
         <result column="invite_cnt" jdbcType="INTEGER" property="invite_cnt" />
         <result column="invite_cnt_uptime" jdbcType="TIMESTAMP" property="invite_cnt_uptime" />
     </resultMap>
+    <resultMap id="BaseResultMapTwo" type="com.zbw.springboot.pojo.ExportUser">
+        <id column="customer_id" jdbcType="BIGINT" property="id" />
+        <result column="userName" jdbcType="VARCHAR" property="userName" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="last_login_city" jdbcType="VARCHAR" property="address" />
+        <result column="register_date" jdbcType="VARCHAR" property="registerDate" />
+    </resultMap>
     <sql id="Base_Column_List">
     id, customer_id, fans_cnt, thumb_cnt, attention_cnt, invite_cnt
   </sql>
@@ -17,6 +24,19 @@
         select
         <include refid="Base_Column_List" />
         from y_customer_cnt where  fans_cnt &lt;&gt; 0 or attention_cnt &lt;&gt; 0;
+    </select>
+    <select id="getExportUser" resultMap="BaseResultMapTwo">
+      select customer_id,CONCAT(surname,NAME) as userName,mobile,last_login_city,register_date from y_customer where customer_status=0
+        <if test="type != null and type != ''">
+            and  vip_type=#{type}
+        </if>
+        <if test="endDate != null and endDate != ''">
+            and  register_date &lt;= #{endDate}
+        </if>
+        <if test="startDate != null and startDate != ''">
+            and  register_date &gt;= #{startDate}
+        </if>
+        ORDER BY register_date DESC
     </select>
     <select id="getMutualFans" resultType = "java.lang.Integer">
              SELECT
