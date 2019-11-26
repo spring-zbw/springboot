@@ -1,6 +1,7 @@
 package com.zbw.springboot.service;
 
 import com.zbw.springboot.pojo.ExportUser;
+import com.zbw.springboot.pojo.InputCondition;
 
 import java.util.List;
 
@@ -10,12 +11,10 @@ import java.util.List;
 public interface TimerStatisticService {
     /**
      * 根据条件查询用户
-     * @param type
-     * @param endDate
-     * @param startDate
+     * @param inputCondition
      * @return
      */
-    List<ExportUser> getExportUser(Integer type, String endDate, String startDate);
+    List<ExportUser> getExportUser(InputCondition inputCondition);
 
     /**
      * 定时任务

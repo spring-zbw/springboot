@@ -87,7 +87,7 @@ public class ExcelUtil {
         response.setContentType("application/octet-stream");
 
         //设置导出Excel的名称
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
 
         //刷新缓冲
         response.flushBuffer();

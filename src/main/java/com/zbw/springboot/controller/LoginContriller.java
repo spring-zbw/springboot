@@ -1,6 +1,7 @@
 package com.zbw.springboot.controller;
 
 import com.zbw.springboot.pojo.ExportUser;
+import com.zbw.springboot.pojo.InputCondition;
 import com.zbw.springboot.service.TimerStatisticService;
 import com.zbw.springboot.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,11 @@ public class LoginContriller {
         return hashMap;
     }
     @GetMapping("export")
-    public void excelDownload(HttpServletResponse response,String textName,Integer type,String endDate,String startDate) throws IOException {
+    public void excelDownload(HttpServletResponse response,InputCondition inputCondition) throws IOException {
 
-
-        List<ExportUser> userList= timerStatisticService.getExportUser(type,endDate,startDate);
-        String sheetName = textName;
-        String fileName = textName+".xls";
+        List<ExportUser> userList= timerStatisticService.getExportUser(inputCondition);
+        String sheetName = inputCondition.getTextName();
+        String fileName = inputCondition.getTextName()+".xls";
 
         ExcelUtil.exportExcel(response, userList, sheetName, fileName, 20);
 

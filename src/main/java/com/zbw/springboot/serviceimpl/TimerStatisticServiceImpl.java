@@ -3,6 +3,7 @@ package com.zbw.springboot.serviceimpl;
 import com.zbw.springboot.dao.TimerStatisticDao;
 import com.zbw.springboot.pojo.CustomerCnt;
 import com.zbw.springboot.pojo.ExportUser;
+import com.zbw.springboot.pojo.InputCondition;
 import com.zbw.springboot.service.TimerStatisticService;
 import org.jfree.chart.ChartColor;
 import org.jfree.chart.ChartFactory;
@@ -76,8 +77,10 @@ public class TimerStatisticServiceImpl implements TimerStatisticService {
     }
 
     @Override
-    public List<ExportUser> getExportUser(Integer type, String endDate, String startDate) {
-
+    public List<ExportUser> getExportUser(InputCondition inputCondition) {
+        Integer type=inputCondition.getType();
+        String endDate=inputCondition.getEndDate();
+        String startDate=inputCondition.getStartDate();
         return timerStatisticDao.getExportUser(type,endDate,startDate);
     }
 
