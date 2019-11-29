@@ -9,6 +9,15 @@ public class ExportUser {
     private String mobile;
     private String address;
     private String registerDate;
+    private String  wechatCredentials;
+
+    public String getWechatCredentials() {
+        return wechatCredentials;
+    }
+
+    public void setWechatCredentials(String wechatCredentials) {
+        this.wechatCredentials = wechatCredentials;
+    }
 
     public Integer getId() {
         return id;

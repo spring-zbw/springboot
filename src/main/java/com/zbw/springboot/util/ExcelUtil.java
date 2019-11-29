@@ -4,6 +4,10 @@ package com.zbw.springboot.util;
  * Created by 郑博文 on 2019/11/25.
  */
 
+import com.google.i18n.phonenumbers.PhoneNumberToCarrierMapper;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.zbw.springboot.pojo.ExportUser;
 import org.apache.poi.hssf.usermodel.*;
 
@@ -11,12 +15,38 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Locale;
 /**
  * Excel工具类
  */
 public class ExcelUtil {
 
+
+    private static PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+
+    private static PhoneNumberToCarrierMapper carrierMapper = PhoneNumberToCarrierMapper.getInstance();
+
+    private static PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
+
+    /**
+     *
+     * @Description: 根据国家代码和手机号  手机归属地
+     * @date 2015-7-13 上午11:33:18
+     * @param @param phoneNumber
+     * @param @param countryCode
+     * @param @return    参数
+     * @throws
+     */
+    public static  String getGeo(String phoneNumber, String countryCode){
+
+        int ccode = Integer.valueOf(countryCode);
+        long phone = Long.valueOf(phoneNumber);
+
+        PhoneNumber pn = new PhoneNumber();
+        pn.setCountryCode(ccode);
+        pn.setNationalNumber(phone);
+        return geocoder.getDescriptionForNumber(pn, Locale.CHINESE);
+    }
     /**
      * Excel表格导出
      * @param response HttpServletResponse对象
@@ -45,7 +75,10 @@ public class ExcelUtil {
         head.add("姓名");
         head.add("注册时间");
         head.add("手机");
-        head.add("城市");
+        head.add("手机归属地");
+        head.add("用户类别");
+        head.add("微信凭证");
+
         //写入List<List<String>>中的数据
         //创建第一行表头
         HSSFRow headrow = sheet.createRow(0);
@@ -69,7 +102,18 @@ public class ExcelUtil {
             list.add(data.getUserName());
             list.add(data.getRegisterDate());
             list.add(data.getMobile());
-            list.add((data.getAddress()));
+            if(data.getMobile()!= null&&!"".equals(data.getMobile().trim())){
+                String geo = getGeo(data.getMobile(), "86");
+                list.add(geo);
+            }else {
+                list.add("");
+            }
+            if (data.getMobile()!= null&&!"".equals(data.getMobile().trim())) {
+                list.add("正常用户");
+            }else {
+                list.add("微信用户");
+            }
+            list.add((data.getWechatCredentials()));
             for (int i = 0; i <list.size(); i++) {
                 //创建一个单元格
                 HSSFCell cell = rows.createCell(i);

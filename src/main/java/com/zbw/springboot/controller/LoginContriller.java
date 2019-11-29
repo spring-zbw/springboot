@@ -39,7 +39,7 @@ public class LoginContriller {
         String sheetName = inputCondition.getTextName();
         String fileName = inputCondition.getTextName()+".xls";
 
-        ExcelUtil.exportExcel(response, userList, sheetName, fileName, 20);
+        ExcelUtil.exportExcel(response, userList, sheetName, fileName, 18);
 
     }
 
