@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,13 +36,11 @@ public class LoginContriller {
     }
     @GetMapping("export")
     public void excelDownload(HttpServletResponse response,InputCondition inputCondition) throws IOException {
-
         List<ExportUser> userList= timerStatisticService.getExportUser(inputCondition);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        String fileName=inputCondition.getTextName()+df.format(new Date())+".xls";
         String sheetName = inputCondition.getTextName();
-        String fileName = inputCondition.getTextName()+".xls";
 
         ExcelUtil.exportExcel(response, userList, sheetName, fileName, 18);
-
     }
-
 }
