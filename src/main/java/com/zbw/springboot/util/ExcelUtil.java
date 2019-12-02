@@ -71,7 +71,7 @@ public class ExcelUtil {
         //设置表格列宽度
         sheet.setDefaultColumnWidth(columnWidth);
         List<String> head = new ArrayList<>();
-        head.add("ID");
+        head.add("约见号");
         head.add("姓名");
         head.add("注册时间");
         head.add("手机");
