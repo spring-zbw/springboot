@@ -14,10 +14,13 @@ public class TextController {
 //        int[] num={0,2,3,3,4};
 //        boolean theValue=duplicate(num,length,duplication);
 //        System.out.println("这是结果"+theValue+"  "+duplication[0]);
-        int[][] matrix={{1,   4,  7, 11, 15},{2,   5,  8, 12, 19},{3,   6,  9, 16, 22},{10, 13, 14, 17, 24},{18, 21, 23, 26, 30}
-    };
-        int target=5;
-        boolean theValue=Find(target,matrix);
+//        int[][] matrix={{1,   4,  7, 11, 15},{2,   5,  8, 12, 19},{3,   6,  9, 16, 22},{10, 13, 14, 17, 24},{18, 21, 23, 26, 30}
+//    };
+//        int target=5;
+//        boolean theValue=Find(target,matrix);
+        StringBuffer stringBuffer=new StringBuffer();
+        stringBuffer.append("A B C");
+        String theValue =replaceSpace(stringBuffer);
         System.out.println("这是结果"+theValue);
     }
     //判断数组是否重复
@@ -83,4 +86,39 @@ public class TextController {
         }
         return false;
     }
+
+    /**
+     * 字符串空格替换算法
+     * @param str
+     * @return
+     */
+    public static String replaceSpace(StringBuffer str){
+        //原来字符串长度
+        int P1=str.length()-1;
+        //遍历循环 如果有一个空格就在后边加两个空格
+        for(int i=0;i<=P1;i++){
+            if(str.charAt(i)==' '){
+                str.append("  ");
+
+            }
+        }
+        //新的字符串长度
+         int P2=str.length()-1;
+        //当整体向左移动
+        while (P1>=0&&P2>P1){
+            //  从P1开始向前获取值
+            char c=str.charAt(P1--);
+               //如果值为空
+                if(c==' '){
+                    str.setCharAt(P2--,'0');
+                    str.setCharAt(P2--,'2');
+                    str.setCharAt(P2--,'%');
+                }else {
+                    str.setCharAt(P2--,c);
+                }
+
+        }
+        return str.toString();
+    }
+
 }
