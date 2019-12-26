@@ -6,14 +6,19 @@ package com.zbw.springboot.controller;
 public class TextController {
 
     public static void main(String[] args){
-        //数组下标
-        int[] duplication={0,1,2,3,4};
-        //数组长度
-        int length=5;
-        //数组本身
-        int[] num={0,2,3,3,4};
-        boolean theValue=duplicate(num,length,duplication);
-        System.out.println("这是结果"+theValue+"  "+duplication[0]);
+//        //数组下标
+//        int[] duplication={0,1,2,3,4};
+//        //数组长度
+//        int length=5;
+//        //数组本身
+//        int[] num={0,2,3,3,4};
+//        boolean theValue=duplicate(num,length,duplication);
+//        System.out.println("这是结果"+theValue+"  "+duplication[0]);
+        int[][] matrix={{1,   4,  7, 11, 15},{2,   5,  8, 12, 19},{3,   6,  9, 16, 22},{10, 13, 14, 17, 24},{18, 21, 23, 26, 30}
+    };
+        int target=5;
+        boolean theValue=Find(target,matrix);
+        System.out.println("这是结果"+theValue);
     }
     //判断数组是否重复
     public static boolean duplicate(int[] nums, int length, int[] duplication) {
@@ -44,5 +49,38 @@ public class TextController {
         int t = nums[i];
         nums[i] = nums[j];
         nums[j] = t;
+    }
+
+    /**
+     * 二维数组中的查找算法
+     * @param target
+     * @param matrix
+     * @return
+     */
+    public static boolean Find(int target, int[][] matrix) {
+        //如果二维数组长度是0则直接返回
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return false;
+        //行
+        int rows = matrix.length,
+                //竖
+                cols = matrix[0].length;
+        // 从右上角开始
+        int r = 0, c = cols - 1;
+        while (r <= rows - 1 && c >= 0) {
+            if (target == matrix[r][c]){
+                return true;
+            }
+            //如果大于就就下移
+            else if (target > matrix[r][c]){
+                r++;
+            }
+            //如果小于则左移
+            else{
+                c--;
+            }
+
+        }
+        return false;
     }
 }
