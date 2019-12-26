@@ -10,6 +10,15 @@ public class ExportUser {
     private String address;
     private String registerDate;
     private String  wechatCredentials;
+    private String referrerPhone;
+
+    public String getReferrerPhone() {
+        return referrerPhone;
+    }
+
+    public void setReferrerPhone(String referrerPhone) {
+        this.referrerPhone = referrerPhone;
+    }
 
     public String getWechatCredentials() {
         return wechatCredentials;

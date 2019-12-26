@@ -77,7 +77,9 @@ public class ExcelUtil {
         head.add("手机");
         head.add("手机归属地");
         head.add("用户类别");
+        head.add("推荐人手机");
         head.add("微信凭证");
+
 
         //写入List<List<String>>中的数据
         //创建第一行表头
@@ -103,8 +105,13 @@ public class ExcelUtil {
             list.add(data.getRegisterDate());
             list.add(data.getMobile());
             if(data.getMobile()!= null&&!"".equals(data.getMobile().trim())){
-                String geo = getGeo(data.getMobile(), "86");
-                list.add(geo);
+                if (data.getMobile().matches("[0-9]+")) {
+                    String geo = getGeo(data.getMobile(), "86");
+                    list.add(geo);
+                }
+                else {
+                    list.add("");
+                }
             }else {
                 list.add("");
             }
@@ -113,6 +120,12 @@ public class ExcelUtil {
             }else {
                 list.add("微信用户");
             }
+            if(data.getReferrerPhone()!= null&&!"".equals(data.getReferrerPhone().trim())) {
+                list.add(data.getReferrerPhone());
+            }else {
+                list.add("");
+            }
+
             list.add((data.getWechatCredentials()));
             for (int i = 0; i <list.size(); i++) {
                 //创建一个单元格

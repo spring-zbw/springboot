@@ -17,6 +17,7 @@
         <result column="last_login_city" jdbcType="VARCHAR" property="address" />
         <result column="register_date" jdbcType="VARCHAR" property="registerDate" />
         <result column="weixin" jdbcType="VARCHAR" property="wechatCredentials" />
+        <result column="referral_mobile" jdbcType="VARCHAR" property="referrerPhone" />
     </resultMap>
     <sql id="Base_Column_List">
     id, customer_id, fans_cnt, thumb_cnt, attention_cnt, invite_cnt
@@ -27,7 +28,7 @@
         from y_customer_cnt where  fans_cnt &lt;&gt; 0 or attention_cnt &lt;&gt; 0;
     </select>
     <select id="getExportUser" resultMap="BaseResultMapTwo">
-      select customer_id,CONCAT(surname,NAME) as userName,mobile,last_login_city,register_date,weixin from y_customer where customer_status=0
+      select customer_id,CONCAT(surname,NAME) as userName,mobile,last_login_city,register_date,weixin,referral_mobile from y_customer where customer_status=0
         <if test="type != null and type != ''">
             and  vip_type=#{type}
         </if>
