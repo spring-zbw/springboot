@@ -1,5 +1,8 @@
 package com.zbw.springboot.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by 郑博文 on 2019/12/26.
  */
@@ -18,10 +21,41 @@ public class TextController {
 //    };
 //        int target=5;
 //        boolean theValue=Find(target,matrix);
-        StringBuffer stringBuffer=new StringBuffer();
-        stringBuffer.append("A B C");
-        String theValue =replaceSpace(stringBuffer);
-        System.out.println("这是结果"+theValue);
+//        StringBuffer stringBuffer=new StringBuffer();
+//        stringBuffer.append("A B C");
+//        String theValue =replaceSpace(stringBuffer);
+//        System.out.println("这是结果"+theValue);
+//        String theMyString="1234";
+//        String aaaa = theMyString.concat("aaaa");
+//        System.out.println("老的字符串"+theMyString);
+//        System.out.println("新的字符串"+aaaa);
+//        Set<String> stringSet=new TreeSet<>();
+//        stringSet.add("1");
+//        stringSet.add("3");
+//        stringSet.add("2");
+//        stringSet.add("-1");
+//        System.out.println("新的字符串"+stringSet);
+//        String theValue="12345";
+//        boolean contains = theValue.contains("120");
+//        System.out.println("是否包含"+contains);
+//        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
+        ArrayList<String> arrayList=new ArrayList<>(Arrays.asList("1","2","3","4"));
+        for(int i=0;i<arrayList.size();i++){
+            arrayList.remove(i);
+            i--;
+        }
+//        for (int i = arrayList.size() -1; i >= 0; i--){
+//            arrayList.remove(i);
+//        }
+        System.out.println(arrayList);
+//        Iterator<String> iterator = arrayList.iterator();
+//        while (iterator.hasNext()){
+//            if(iterator.next()
+//                iterator.remove();
+//
+//        }
+//        System.out.println(arrayList);
+
     }
     //判断数组是否重复
     public static boolean duplicate(int[] nums, int length, int[] duplication) {
@@ -121,4 +155,17 @@ public class TextController {
         return str.toString();
     }
 
+    /**
+     * 反向列表
+     * @param listNode
+     * @return
+     */
+//    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+//        ArrayList<Integer> ret = new ArrayList<>();
+//        if (listNode != null) {
+//            ret.addAll(printListFromTailToHead(listNode.next));
+//            ret.add(listNode.val);
+//        }
+//        return ret;
+//    }
 }
